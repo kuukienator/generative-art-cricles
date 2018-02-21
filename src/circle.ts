@@ -16,6 +16,7 @@ export default class Circle {
   }
 
   draw(context: CanvasRenderingContext2D) {
+    context.fillStyle = 'hsl(270,60%,90%)';
     context.beginPath();
     context.arc(
       this.position.x,
