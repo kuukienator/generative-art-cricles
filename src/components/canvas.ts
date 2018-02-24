@@ -1,6 +1,11 @@
 import Circle from './circle';
 import { Util } from './../lib/util';
-import { MAX_ITERATIONS, COLORS } from './../config/index';
+import {
+    MAX_ITERATIONS,
+    COLORS,
+    MIN_RADIUS,
+    MAX_RADIUS
+} from './../config/index';
 import Point from './point';
 import HSLColor from './HSLColor';
 
@@ -90,7 +95,7 @@ export default class Canvas {
                 _circle = Circle.generateRandomCircle(
                     new Point(0, this._width),
                     new Point(0, this._height),
-                    new Point(5, 150)
+                    new Point(MIN_RADIUS, MAX_RADIUS)
                 );
 
                 _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
