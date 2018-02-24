@@ -4,5 +4,6 @@
 
 It makes stuff like this:
 
+<img src="/circles.png" width="250">
 ![alt text](/circles.png)
 
