@@ -48,7 +48,7 @@ export default class Canvas {
                 _circle = Circle.generateRandomCircle(
                     new Point(0, this._width),
                     new Point(0, this._height),
-                    new Point(5, 100)
+                    new Point(5, 150)
                 );
 
                 _circle.setColor(COLORS[Util.getRandomInt(0, COLORS.length)]);
