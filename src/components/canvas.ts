@@ -1,5 +1,5 @@
 import Circle from './circle';
-import { Util, COLORS } from './util';
+import { Util, COLORS } from './../lib/util';
 import Point from './point';
 import HSLColor from './HSLColor';
 

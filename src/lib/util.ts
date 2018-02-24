@@ -1,4 +1,4 @@
-import HSLColor from './HSLColor';
+import HSLColor from './../components/HSLColor';
 
 /**
  *
