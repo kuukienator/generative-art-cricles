@@ -1,6 +1,7 @@
 import Circle from './circle';
-import { Util } from './util';
+import { Util, COLORS } from './util';
 import Point from './point';
+import HSLColor from './HSLColor';
 
 export default class Canvas {
   _canvas: HTMLCanvasElement;
@@ -30,6 +31,15 @@ export default class Canvas {
     this._circles = this._circles.concat(circles);
   }
 
+  isInsideBounds(circle: Circle): boolean {
+    return (
+      circle.position.x - circle.radius > 0 &&
+      circle.position.y - circle.radius > 0 &&
+      circle.position.x + circle.radius < this._width &&
+      circle.position.y + circle.radius < this._height
+    );
+  }
+
   generateRandomCircles(count: number) {
     for (let index = 0; index < count; index++) {
       let _circle: Circle;
@@ -38,9 +48,14 @@ export default class Canvas {
         _circle = Circle.generateRandomCircle(
           new Point(0, this._width),
           new Point(0, this._height),
-          new Point(1, 75)
+          new Point(5, 100)
         );
-      } while (this._circles.some(c => c.intersectsWith(_circle)));
+
+        _circle.setColor(COLORS[Util.getRandomInt(0, COLORS.length)]);
+      } while (
+        !this.isInsideBounds(_circle) ||
+        this._circles.some(c => c.intersectsWith(_circle))
+      );
 
       this._circles.push(_circle);
     }

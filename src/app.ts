@@ -4,10 +4,13 @@ import Point from './point';
 
 export default class App {
   constructor() {
-    const containerElement = document.getElementById('container');
-    const canvas = new Canvas(containerElement, 600, 600);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    canvas.generateRandomCircles(50);
+    const containerElement = document.getElementById('container');
+    const canvas = new Canvas(containerElement, width, height);
+
+    canvas.generateRandomCircles(500);
 
     canvas.draw();
   }
