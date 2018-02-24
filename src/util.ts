@@ -1,6 +1,21 @@
 import HSLColor from './HSLColor';
 
+/**
+ *
+ *
+ * @export
+ * @class Util
+ */
 export class Util {
+    /**
+     *
+     *
+     * @static
+     * @param {number} min
+     * @param {number} max
+     * @returns {number}
+     * @memberof Util
+     */
     static getRandomInt(min: number, max: number): number {
         min = Math.ceil(min);
         max = Math.floor(max);

@@ -3,6 +3,12 @@ import { Util, COLORS } from './util';
 import Point from './point';
 import HSLColor from './HSLColor';
 
+/**
+ *
+ *
+ * @export
+ * @class Canvas
+ */
 export default class Canvas {
     _canvas: HTMLCanvasElement;
     _circles: Array<Circle>;
@@ -10,6 +16,13 @@ export default class Canvas {
     _width: number;
     _height: number;
 
+    /**
+     * Creates an instance of Canvas.
+     * @param {Element} containerElement
+     * @param {number} width
+     * @param {number} height
+     * @memberof Canvas
+     */
     constructor(containerElement: Element, width: number, height: number) {
         this._height = height;
         this._width = width;
@@ -23,14 +36,33 @@ export default class Canvas {
         this._context = this._canvas.getContext('2d');
     }
 
+    /**
+     *
+     *
+     * @param {Circle} circle
+     * @memberof Canvas
+     */
     addCircle(circle: Circle) {
         this._circles.push(circle);
     }
 
+    /**
+     *
+     *
+     * @param {Array<Circle>} circles
+     * @memberof Canvas
+     */
     addCircles(circles: Array<Circle>) {
         this._circles = this._circles.concat(circles);
     }
 
+    /**
+     *
+     *
+     * @param {Circle} circle
+     * @returns {boolean}
+     * @memberof Canvas
+     */
     isInsideBounds(circle: Circle): boolean {
         return (
             circle.position.x - circle.radius > 0 &&
@@ -40,6 +72,12 @@ export default class Canvas {
         );
     }
 
+    /**
+     *
+     *
+     * @param {number} count
+     * @memberof Canvas
+     */
     generateRandomCircles(count: number) {
         for (let index = 0; index < count; index++) {
             let _circle: Circle;
@@ -61,6 +99,11 @@ export default class Canvas {
         }
     }
 
+    /**
+     *
+     *
+     * @memberof Canvas
+     */
     draw() {
         this._circles.forEach(circle => {
             circle.draw(this._context);
