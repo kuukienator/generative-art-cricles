@@ -1,5 +1,6 @@
 import Circle from './circle';
-import { Util, COLORS } from './../lib/util';
+import { Util } from './../lib/util';
+import { MAX_ITERATIONS, COLORS } from './../config/index';
 import Point from './point';
 import HSLColor from './HSLColor';
 
@@ -80,22 +81,32 @@ export default class Canvas {
      */
     generateRandomCircles(count: number) {
         for (let index = 0; index < count; index++) {
+            let iterationCount = 0;
             let _circle: Circle;
+            let _isValid: boolean;
 
             do {
+                iterationCount++;
                 _circle = Circle.generateRandomCircle(
                     new Point(0, this._width),
                     new Point(0, this._height),
                     new Point(5, 150)
                 );
 
-                _circle.setColor(COLORS[Util.getRandomInt(0, COLORS.length)]);
-            } while (
-                !this.isInsideBounds(_circle) ||
-                this._circles.some(c => c.intersectsWith(_circle))
-            );
+                _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
 
-            this._circles.push(_circle);
+                _isValid =
+                    this.isInsideBounds(_circle) &&
+                    !this._circles.some(c => c.intersectsWith(_circle));
+
+                if (!_isValid) {
+                    _circle = null;
+                }
+            } while (!_isValid && iterationCount < MAX_ITERATIONS);
+
+            if (_circle) {
+                this._circles.push(_circle);
+            }
         }
     }
 

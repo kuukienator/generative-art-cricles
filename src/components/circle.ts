@@ -1,5 +1,6 @@
 import Point from './point';
-import { Util, CIRCLE_MARGIN } from './../lib/util';
+import { Util } from './../lib/util';
+import { CIRCLE_MARGIN } from './../config/index';
 import HSLColor from './HSLColor';
 
 /**

@@ -1,5 +1,3 @@
-import HSLColor from './../components/HSLColor';
-
 /**
  *
  *
@@ -21,12 +19,17 @@ export class Util {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    /**
+     *
+     *
+     * @static
+     * @template T
+     * @param {Array<T>} list
+     * @returns {T}
+     * @memberof Util
+     */
+    static getRandomEntry<T>(list: Array<T>): T {
+        return list[this.getRandomInt(0, list.length)];
+    }
 }
-
-export const COLORS: Array<HSLColor> = [
-    new HSLColor(270, 90, 90),
-    new HSLColor(270, 90, 80),
-    new HSLColor(270, 90, 70)
-];
-
-export const CIRCLE_MARGIN: number = 10;

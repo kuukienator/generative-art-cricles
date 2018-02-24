@@ -12,7 +12,7 @@ export default class App {
         const canvas = new CircleCanvas(containerElement, width, height);
         //const canvas = new Canvas(containerElement, width, height);
 
-        canvas.generateRandomCircles(200);
+        canvas.generateRandomCircles(350);
         canvas.draw();
     }
 }
