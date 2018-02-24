@@ -10,3 +10,5 @@ It makes stuff like this:
     <img src="/examples/circles_3.png" width="350">
     <img src="/examples/circles_4.png" width="350">
 </div>
+
+[Inspired by: Circle Packing Using Stochastic Search](https://sighack.com/post/circle-packing-using-stochastic-search)
