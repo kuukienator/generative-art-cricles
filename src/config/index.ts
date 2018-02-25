@@ -8,7 +8,9 @@ export const BASE_COLORS: Array<HSLColor> = [
 ];
 
 export const COLORS: Array<HSLColor> = [];
-export const CIRCLE_MARGIN: number = 10;
+export const CIRCLE_MARGIN: number = 5;
 export const MAX_ITERATIONS: number = 50000;
-export const MIN_RADIUS: number = 10;
-export const MAX_RADIUS: number = 100;
+export const MAX_ITERATIONS_PER_SECTION: number = 2000;
+export const MIN_RADIUS: number = 5;
+export const MAX_RADIUS: number = 250;
+export const IS_DEBUG: boolean = true;

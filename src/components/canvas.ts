@@ -4,7 +4,9 @@ import {
     MAX_ITERATIONS,
     COLORS,
     MIN_RADIUS,
-    MAX_RADIUS
+    MAX_RADIUS,
+    MAX_ITERATIONS_PER_SECTION,
+    IS_DEBUG
 } from './../config/index';
 import Point from './point';
 import HSLColor from './HSLColor';
@@ -87,15 +89,24 @@ export default class Canvas {
     generateRandomCircles(count: number) {
         for (let index = 0; index < count; index++) {
             let iterationCount = 0;
+            let iterationCountForSection = 0;
+            let maxRadiusPercentage = 1;
             let _circle: Circle;
             let _isValid: boolean;
 
             do {
                 iterationCount++;
+                iterationCountForSection++;
+                if (iterationCountForSection === MAX_ITERATIONS_PER_SECTION) {
+                    iterationCountForSection = 0;
+                    maxRadiusPercentage -= 0.1;
+                    maxRadiusPercentage = Math.max(maxRadiusPercentage, 0.25);
+                }
+
                 _circle = Circle.generateRandomCircle(
                     new Point(0, this._width),
                     new Point(0, this._height),
-                    new Point(MIN_RADIUS, MAX_RADIUS)
+                    new Point(MIN_RADIUS, MAX_RADIUS * maxRadiusPercentage)
                 );
 
                 _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
@@ -111,6 +122,9 @@ export default class Canvas {
 
             if (_circle) {
                 this._circles.push(_circle);
+                if (IS_DEBUG) {
+                    this.draw();
+                }
             }
         }
     }
