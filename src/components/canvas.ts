@@ -6,7 +6,7 @@ import {
     MIN_RADIUS,
     MAX_RADIUS,
     MAX_ITERATIONS_PER_SECTION,
-    IS_DEBUG
+    SHOW_ANIMATIONS
 } from './../config/index';
 import Point from './point';
 import HSLColor from './HSLColor';
@@ -88,45 +88,78 @@ export default class Canvas {
      */
     generateRandomCircles(count: number) {
         for (let index = 0; index < count; index++) {
-            let iterationCount = 0;
-            let iterationCountForSection = 0;
-            let maxRadiusPercentage = 1;
-            let _circle: Circle;
-            let _isValid: boolean;
-
-            do {
-                iterationCount++;
-                iterationCountForSection++;
-                if (iterationCountForSection === MAX_ITERATIONS_PER_SECTION) {
-                    iterationCountForSection = 0;
-                    maxRadiusPercentage -= 0.1;
-                    maxRadiusPercentage = Math.max(maxRadiusPercentage, 0.25);
-                }
-
-                _circle = Circle.generateRandomCircle(
-                    new Point(0, this._width),
-                    new Point(0, this._height),
-                    new Point(MIN_RADIUS, MAX_RADIUS * maxRadiusPercentage)
-                );
-
-                _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
-
-                _isValid =
-                    this.isInsideBounds(_circle) &&
-                    !this._circles.some(c => c.intersectsWith(_circle));
-
-                if (!_isValid) {
-                    _circle = null;
-                }
-            } while (!_isValid && iterationCount < MAX_ITERATIONS);
-
+            const _circle = this._createCircle();
             if (_circle) {
                 this._circles.push(_circle);
-                if (IS_DEBUG) {
-                    this.draw();
-                }
             }
         }
+    }
+
+    /**
+     *
+     *
+     * @param {number} count
+     * @memberof Canvas
+     */
+    generateRandomCirclesRecursive(count: number) {
+        if (count === 0) {
+            console.log('Done creating circles');
+            return;
+        }
+
+        count--;
+        const _circle = this._createCircle();
+        if (_circle) {
+            this._circles.push(_circle);
+            this.draw();
+        }
+        if (SHOW_ANIMATIONS) {
+            setTimeout(() => this.generateRandomCirclesRecursive(count), 100);
+        } else {
+            this.generateRandomCirclesRecursive(count);
+        }
+    }
+
+    /**
+     *
+     *
+     * @returns
+     * @memberof Canvas
+     */
+    _createCircle() {
+        let iterationCount = 0;
+        let iterationCountForSection = 0;
+        let maxRadiusPercentage = 1;
+        let _circle: Circle;
+        let _isValid: boolean;
+
+        do {
+            iterationCount++;
+            iterationCountForSection++;
+            if (iterationCountForSection === MAX_ITERATIONS_PER_SECTION) {
+                iterationCountForSection = 0;
+                maxRadiusPercentage -= 0.1;
+                maxRadiusPercentage = Math.max(maxRadiusPercentage, 0.25);
+            }
+
+            _circle = Circle.generateRandomCircle(
+                new Point(0, this._width),
+                new Point(0, this._height),
+                new Point(MIN_RADIUS, MAX_RADIUS * maxRadiusPercentage)
+            );
+
+            _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
+
+            _isValid =
+                this.isInsideBounds(_circle) &&
+                !this._circles.some(c => c.intersectsWith(_circle));
+
+            if (!_isValid) {
+                _circle = null;
+            }
+        } while (!_isValid && iterationCount < MAX_ITERATIONS);
+
+        return _circle;
     }
 
     /**
@@ -135,6 +168,8 @@ export default class Canvas {
      * @memberof Canvas
      */
     draw() {
+        this._context.fillStyle = '#fff';
+        this._context.fillRect(0, 0, this._width, this._height);
         this._circles.forEach(circle => {
             circle.draw(this._context);
         });

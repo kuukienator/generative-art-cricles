@@ -12,8 +12,8 @@ export default class App {
         const height = window.innerHeight;
 
         const containerElement = document.getElementById('container');
-        //const canvas = new CircleCanvas(containerElement, width, height);
-        const canvas = new Canvas(containerElement, width, height);
+        const canvas = new CircleCanvas(containerElement, width, height);
+        //const canvas = new Canvas(containerElement, width, height);
 
         const baseColor = Util.getRandomEntry<HSLColor>(BASE_COLORS);
 
@@ -27,7 +27,7 @@ export default class App {
             );
         }
 
-        canvas.generateRandomCircles(200);
-        //canvas.draw();
+        canvas.generateRandomCirclesRecursive(2000);
+        canvas.draw();
     }
 }
