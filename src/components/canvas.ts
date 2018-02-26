@@ -2,7 +2,6 @@ import Circle from './circle';
 import { Util } from './../lib/util';
 import {
     MAX_ITERATIONS,
-    COLORS,
     MIN_RADIUS,
     MAX_RADIUS,
     MAX_ITERATIONS_PER_SECTION,
@@ -23,6 +22,7 @@ export default class Canvas {
     _context: CanvasRenderingContext2D;
     _width: number;
     _height: number;
+    _colors: Array<HSLColor>;
 
     /**
      * Creates an instance of Canvas.
@@ -42,6 +42,10 @@ export default class Canvas {
 
         this._circles = [];
         this._context = this._canvas.getContext('2d');
+    }
+
+    setColors(colors: Array<HSLColor>) {
+        this._colors = colors;
     }
 
     /**
@@ -139,7 +143,7 @@ export default class Canvas {
             if (iterationCountForSection === MAX_ITERATIONS_PER_SECTION) {
                 iterationCountForSection = 0;
                 maxRadiusPercentage -= 0.1;
-                maxRadiusPercentage = Math.max(maxRadiusPercentage, 0.25);
+                maxRadiusPercentage = Math.max(maxRadiusPercentage, 0.1);
             }
 
             _circle = Circle.generateRandomCircle(
@@ -148,7 +152,7 @@ export default class Canvas {
                 new Point(MIN_RADIUS, MAX_RADIUS * maxRadiusPercentage)
             );
 
-            _circle.setColor(Util.getRandomEntry<HSLColor>(COLORS));
+            _circle.setColor(Util.getRandomEntry<HSLColor>(this._colors));
 
             _isValid =
                 this.isInsideBounds(_circle) &&
