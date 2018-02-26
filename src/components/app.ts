@@ -21,9 +21,9 @@ export default class App {
 
         const colors = [
             //new HSLColor(360, 100, 100),
-            new HSLColor(270, 90, 50),
-            new HSLColor(318, 90, 50),
-            new HSLColor(210, 90, 50)
+            new HSLColor(270, 90, 65),
+            new HSLColor(318, 90, 65),
+            new HSLColor(210, 90, 65)
             //new HSLColor(100, 90, 50)
         ];
         // canvas.setColors(this.createRandomizedColors(BASE_COLORS));

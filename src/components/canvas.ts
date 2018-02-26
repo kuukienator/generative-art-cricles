@@ -44,6 +44,12 @@ export default class Canvas {
         this._context = this._canvas.getContext('2d');
     }
 
+    /**
+     *
+     *
+     * @param {Array<HSLColor>} colors
+     * @memberof Canvas
+     */
     setColors(colors: Array<HSLColor>) {
         this._colors = colors;
     }
