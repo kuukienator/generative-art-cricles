@@ -1,6 +1,6 @@
 # generative-art-cricles
 
-[Demo](http://kuukienator.eu/generative-art-cricles/)
+[Demo](https://kuukienator.github.io/generative-art-cricles/)
 
 It makes stuff like this:
 
